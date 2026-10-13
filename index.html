@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Convenience Store POS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="pos-app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">IT 415 Practical Examination</p>
+          <h1>Campus Convenience Store POS</h1>
+          <p class="subtitle">Select products to begin a customer order.</p>
+        </div>
+        <div class="transaction-badge" aria-label="Current transaction status">
+          <span class="status-dot"></span>
+          New transaction
+        </div>
+      </header>
+
+      <p id="app-message" class="app-message" role="status" aria-live="polite">
+        Stage 1 ready: choose a product to prepare for Stage 2 ordering.
+      </p>
+
+      <div class="workspace">
+        <section class="panel products-panel" aria-labelledby="products-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Browse products</p>
+              <h2 id="products-heading">Available items</h2>
+            </div>
+            <span class="item-count">6 items</span>
+          </div>
+          <div id="product-list" class="product-grid"></div>
+        </section>
+
+        <aside class="side-column">
+          <section class="panel" aria-labelledby="cart-heading">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">Order summary</p>
+                <h2 id="cart-heading">Shopping cart</h2>
+              </div>
+            </div>
+            <div class="empty-state">
+              <span class="empty-icon" aria-hidden="true">🛒</span>
+              <p>Your cart is empty.</p>
+              <small>Cart controls will be added in Stage 2.</small>
+            </div>
+            <div class="total-row">
+              <span>Total amount due</span>
+              <strong>₱0.00</strong>
+            </div>
+          </section>
+
+          <section class="panel muted-panel" aria-labelledby="payment-heading">
+            <p class="section-kicker">Payment</p>
+            <h2 id="payment-heading">Cash payment</h2>
+            <label for="payment-input">Amount received</label>
+            <input id="payment-input" type="text" placeholder="₱0.00" disabled />
+            <small>Payment validation will be added in Stage 3.</small>
+          </section>
+
+          <section class="panel muted-panel receipt-panel" aria-labelledby="receipt-heading">
+            <p class="section-kicker">Receipt</p>
+            <h2 id="receipt-heading">Transaction receipt</h2>
+            <p>A completed receipt will appear here after payment.</p>
+          </section>
+        </aside>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
