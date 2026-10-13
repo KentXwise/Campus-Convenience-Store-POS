@@ -21,7 +21,7 @@
       </header>
 
       <p id="app-message" class="app-message" role="status" aria-live="polite">
-        Stage 1 ready: choose a product to prepare for Stage 2 ordering.
+        Add products to the cart, then enter the customer's cash payment.
       </p>
 
       <div class="workspace">
@@ -55,14 +55,20 @@
             <p class="section-kicker">Payment</p>
             <h2 id="payment-heading">Cash payment</h2>
             <label for="payment-input">Amount received</label>
-            <input id="payment-input" type="text" placeholder="₱0.00" disabled />
-            <small>Payment validation will be added in Stage 3.</small>
+            <div class="payment-entry">
+              <input id="payment-input" type="text" inputmode="decimal" placeholder="e.g., 100.00" aria-describedby="payment-help payment-feedback" />
+              <button id="pay-button" class="pay-button" type="button">Confirm Payment</button>
+            </div>
+            <small id="payment-help">Enter the cash amount received in Philippine pesos.</small>
+            <p id="payment-feedback" class="payment-feedback" role="alert" aria-live="assertive"></p>
           </section>
 
           <section class="panel muted-panel receipt-panel" aria-labelledby="receipt-heading">
             <p class="section-kicker">Receipt</p>
             <h2 id="receipt-heading">Transaction receipt</h2>
-            <p>A completed receipt will appear here after payment.</p>
+            <div id="receipt-content">
+              <p>A completed receipt will appear here after payment.</p>
+            </div>
           </section>
         </aside>
       </div>
