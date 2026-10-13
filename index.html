@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,14 +9,36 @@
   <body>
     <main class="pos-app">
       <header class="app-header">
-        <div>
+        <div class="header-branding">
           <p class="eyebrow">IT 415 Practical Examination</p>
           <h1>Campus Convenience Store POS</h1>
           <p class="subtitle">Select products to begin a customer order.</p>
         </div>
-        <div class="transaction-badge" aria-label="Current transaction status">
-          <span class="status-dot"></span>
-          New transaction
+        <div class="header-actions">
+          <!-- Centralized Color Scheme Selector -->
+          <div class="theme-selector-wrap" aria-label="Color scheme options">
+            <label for="theme-select" class="theme-label">
+              <span class="theme-icon" aria-hidden="true">🎨</span>
+              <span class="visually-hidden">Color Scheme:</span>
+            </label>
+            <select id="theme-select" class="theme-select" aria-label="Select color scheme">
+              <option value="light">Light Mode</option>
+              <option value="dark">Dark Mode</option>
+              <option value="ocean-blue">Ocean Blue</option>
+              <option value="forest-green">Forest Green</option>
+              <option value="warm-amber">Warm Amber</option>
+              <option value="purple-night">Purple Night</option>
+            </select>
+            <button id="theme-modal-btn" class="theme-palette-btn" type="button" aria-haspopup="dialog" title="Browse Theme Palette Gallery">
+              Palette
+            </button>
+          </div>
+
+          <!-- Transaction Status Indicator -->
+          <div id="transaction-status-badge" class="transaction-badge" aria-label="Current transaction status">
+            <span class="status-dot"></span>
+            <span id="transaction-badge-text">New transaction</span>
+          </div>
         </div>
       </header>
 
@@ -25,6 +47,7 @@
       </p>
 
       <div class="workspace">
+        <!-- Product Catalog Section -->
         <section class="panel products-panel" aria-labelledby="products-heading">
           <div class="section-heading">
             <div>
@@ -36,13 +59,18 @@
           <div id="product-list" class="product-grid"></div>
         </section>
 
+        <!-- Order Summary, Payment, and Receipt Sidebar -->
         <aside class="side-column">
+          <!-- Shopping Cart Panel -->
           <section class="panel" aria-labelledby="cart-heading">
             <div class="section-heading">
               <div>
                 <p class="section-kicker">Order summary</p>
                 <h2 id="cart-heading">Shopping cart</h2>
               </div>
+              <button id="clear-cart-btn" class="clear-cart-btn" type="button" aria-label="Clear shopping cart" style="display: none;">
+                Clear
+              </button>
             </div>
             <div id="cart-content" aria-live="polite"></div>
             <div class="total-row">
@@ -51,6 +79,7 @@
             </div>
           </section>
 
+          <!-- Cash Payment Panel -->
           <section class="panel muted-panel" aria-labelledby="payment-heading">
             <p class="section-kicker">Payment</p>
             <h2 id="payment-heading">Cash payment</h2>
@@ -59,10 +88,22 @@
               <input id="payment-input" type="text" inputmode="decimal" placeholder="e.g., 100.00" aria-describedby="payment-help payment-feedback" />
               <button id="pay-button" class="pay-button" type="button">Confirm Payment</button>
             </div>
+            <!-- Quick tender suggestions for cashier convenience -->
+            <div class="quick-tender-group" aria-label="Quick cash tender options">
+              <span class="quick-tender-label">Quick Tender</span>
+              <div class="quick-tender-chips">
+                <button type="button" class="tender-chip" data-tender="exact" title="Pay exact order total">Exact</button>
+                <button type="button" class="tender-chip" data-tender="50">₱50</button>
+                <button type="button" class="tender-chip" data-tender="100">₱100</button>
+                <button type="button" class="tender-chip" data-tender="200">₱200</button>
+                <button type="button" class="tender-chip" data-tender="500">₱500</button>
+              </div>
+            </div>
             <small id="payment-help">Enter the cash amount received in Philippine pesos.</small>
             <p id="payment-feedback" class="payment-feedback" role="alert" aria-live="assertive"></p>
           </section>
 
+          <!-- Transaction Receipt Panel -->
           <section class="panel muted-panel receipt-panel" aria-labelledby="receipt-heading">
             <p class="section-kicker">Receipt</p>
             <h2 id="receipt-heading">Transaction receipt</h2>
@@ -73,6 +114,24 @@
         </aside>
       </div>
     </main>
+
+    <!-- Accessible Modal Dialog System -->
+    <div id="pos-modal-backdrop" class="modal-backdrop" hidden aria-hidden="true">
+      <div id="pos-modal" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <span id="modal-icon" class="modal-icon" aria-hidden="true">🎨</span>
+            <h3 id="modal-title" class="modal-title">Theme Selection</h3>
+          </div>
+          <button id="modal-close-btn" class="modal-close-btn" type="button" aria-label="Close dialog">&times;</button>
+        </div>
+        <div id="modal-body" class="modal-body"></div>
+        <div id="modal-footer" class="modal-footer">
+          <button id="modal-cancel-btn" class="modal-btn modal-btn-secondary" type="button">Cancel</button>
+          <button id="modal-confirm-btn" class="modal-btn modal-btn-primary" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
 
     <script src="app.js"></script>
   </body>
